@@ -20,22 +20,13 @@ app.use(cookieParser());
 
 const setCustomCacheControl = (res, path) => {
   // if (serveStatic.mime.lookup(path) === 'text/html') {
-    res.setHeader('Cache-Control', 'public, max-age=0')
+    res.setHeader('Cache-Control', 'no-cache, no-store')
   // }
 }
 
 app.use(serveStatic(path.join(__dirname, 'public'), {
   setHeaders: setCustomCacheControl
 }));
-
-// app.get('/*', function (req, res, next) {
-//
-//   if (req.url.indexOf("/images/") === 0 || req.url.indexOf("/stylesheets/") === 0) {
-//     res.setHeader("Cache-Control", "public, max-age=601");
-//     res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
-//   }
-//   next();
-// });
 
 app.use('/', indexRouter);
 
